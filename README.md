@@ -16,7 +16,9 @@ Options:
 
 
 交互式删除微博，默认一次删除的条数为10。 
+
 删除 n 条之后，会提示是否继续删除 continue delete or quit?(c/q) ：
+
     c 为继续删 n 条；
     q 为退出。
   
