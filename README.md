@@ -1,0 +1,2 @@
+# delete-weibo
+delete weibo
