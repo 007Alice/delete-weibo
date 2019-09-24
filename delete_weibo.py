@@ -1,17 +1,18 @@
 # coding:utf-8
 from selenium import webdriver
 import time
+from optparse import OptionParser
 
 def login_weibo(user,pwd,weibo):
     weibo.get('http://weibo.com/login.php')
     time.sleep(5)
-	# send username
+    # send username
     weibo.find_element_by_xpath('//*[@id="loginname"]').send_keys(user)
-	# send password
+    # send password
     weibo.find_element_by_xpath('//*[@id="pl_login_form"]/div/div[3]/div[2]/div/input').send_keys(pwd)
-	# not save state
+    # not save state
     weibo.find_element_by_xpath('//*[@id="login_form_savestate"]').click()
-	# click login button
+    # click login button
     weibo.find_element_by_xpath('//*[@id="pl_login_form"]/div/div[3]/div[6]/a').click()
     time.sleep(5)
     print '[debug] login success'
@@ -22,7 +23,7 @@ def open_weibo(weibo):
     
 def delete_weibo(user,pwd,num,weibo):
     login_weibo(user,pwd,weibo)
-    scroll_height_js='document.documentElement.scrollTop=200'
+    scroll_height_js = 'document.documentElement.scrollTop=200'
     time.sleep(3)
     weibo.find_element_by_xpath('//*[@id="v6_pl_rightmod_myinfo"]/div/div/div[2]/ul/li[3]/a/strong').click()
     while True:
@@ -30,7 +31,7 @@ def delete_weibo(user,pwd,num,weibo):
         # del_=0
         weibo.refresh()
         if del_ == 'c':
-		# delete
+        # delete
             time.sleep(2)
             for i in range(0,num):
                 # time.sleep(3)
@@ -43,15 +44,38 @@ def delete_weibo(user,pwd,num,weibo):
             break
     
 def start_weibo():
-    weibo = webdriver.Firefox()
-    weibo.maximize_window()
-    time.sleep(10)
-    user='change_to_your_username'
-    pwd='change_to_your_password'
-	# the number of weibo to delete at once
-    num = 15
-    delete_weibo(user,pwd,num,weibo)
-    weibo.close()
-	
+
+    parser = OptionParser()
+    parser.add_option("-u", "--usr", default = False, help = "your username of weibo")
+    parser.add_option("-p", "--pwd", default = False, help = "your password of weibo")
+    parser.add_option("-n", "--num", type = 'int' ,default = False, help = "the number to delete at once. default num is 10.")
+    (options, args) = parser.parse_args()
+    
+    if options.usr:
+        usr_ = options.usr
+    else:
+        print "[warning] please input your username."
+        
+    if options.pwd:
+        pwd_ = options.pwd
+    else:
+        print "[warning] please input your username."
+        
+    if options.num:
+        num_ = options.num
+    else:
+        num_ = 10
+        
+    
+    if options.usr and options.pwd:
+        weibo = webdriver.Firefox()
+        weibo.maximize_window()
+        time.sleep(10)
+        
+        delete_weibo(usr_,pwd_,num_,weibo)
+        weibo.close()
+    
 if __name__ == '__main__':
     start_weibo()
+    
+    
