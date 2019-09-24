@@ -3,7 +3,7 @@
 delete_weibo.py
 
 
-'''
+```
 root@kali:/home/Alice007# python delete_weibo.py -h
 Usage: delete_weibo.py [options]
 
@@ -12,7 +12,7 @@ Options:
   -u USR, --usr=USR  your username of weibo
   -p PWD, --pwd=PWD  your password of weibo
   -n NUM, --num=NUM  the number to delete at once. default num is 10.
-'''
+```
 
 
 交互式删除微博，默认一次删除的条数为10。 
