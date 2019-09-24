@@ -22,10 +22,12 @@ Options:
     c 为继续删 n 条；
     q 为退出。
   
-  
+```
 root@kali:/home/Alice007# python delete_weibo.py -u username -p password
-
+```
 
 可设置一次性删除的条数，如20条。如果该数字超过页面显示的微博数量，则需要在脚本中新增一个循环，加上 weibo.refresh() 。
 
+```
 root@kali:/home/Alice007# python delete_weibo.py -u username -p password -n 20
+```
